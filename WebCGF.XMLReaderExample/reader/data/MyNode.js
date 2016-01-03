@@ -80,7 +80,7 @@ MyNode.prototype.display = function(parentTexture, parentMaterial, currTime) {
 		this.animation.apply(currTime);
 	}
 
- 	for(var i = 0; i < this.descendants.length; i++)
+  for(var i = 0; i < this.descendants.length; i++)
  	{
  		if (this.scene.nodes[this.descendants[i]] == null)
  		{
@@ -90,14 +90,14 @@ MyNode.prototype.display = function(parentTexture, parentMaterial, currTime) {
  				return false;
  			}
  			if (currentMaterial != null) currentMaterial.apply();
- 			if (currentTexture != null) 
+ 			if (currentTexture != null)
  				{
  					this.scene.leaves[this.descendants[i]].scaleTexCoords(currentTexture.s, currentTexture.t);
  					currentTexture.bind();
  				}
  			this.scene.leaves[this.descendants[i]].display();
  			if (currentTexture != null) currentTexture.unbind();
- 			
+
  		}
  		else
  			this.scene.nodes[this.descendants[i]].display(currentTexture ,currentMaterial, currTime);

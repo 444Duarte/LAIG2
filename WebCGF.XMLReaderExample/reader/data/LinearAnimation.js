@@ -9,7 +9,7 @@
 function LinearAnimation(scene,id,controlPoints, time){
 	Animation.call(this,scene,id);
 	this.initTime = null;
-
+	this.rotation = true;
 
 	this.controlPoints = controlPoints;
 
@@ -86,9 +86,18 @@ LinearAnimation.prototype.applyTransformations= function(time, i, previousVector
 		var translation = newVector.toArray();
 		var rotation = Math.atan2(routeVector.x,routeVector.z);
 		this.scene.translate(translation[0], translation[1], translation[2]);
-		this.scene.rotate(rotation, 0,1,0);		
+		if(this.rotation)
+			this.scene.rotate(rotation, 0,1,0);		
 		return;
 	}else{
 		this.applyTransformations(time, i+1, newVector, nextRouteTime, this.times[i+1]);
 	}
+};
+
+/**
+ * Set if the transformation should apply a rotation in the Y axis
+ * @param state {boolean} - True if animation should apply rotation. By default state is true
+ */
+LinearAnimation.prototype.setRotation= function(state){
+	this.rotation = state;	
 };
